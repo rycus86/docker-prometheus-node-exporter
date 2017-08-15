@@ -9,7 +9,7 @@ script:
 # setup QEMU
 - docker run --rm --privileged multiarch/qemu-user-static:register --reset
 # build
-- docker build -t node_exporter:$DOCKER_TAG -f Dockerfile --build-arg ARCH=$DOCKER_ARCH --build-arg VERSION=$NODE_EXPORTER_VERSION .
+- docker build -t node_exporter:$DOCKER_TAG --build-arg ARCH=$DOCKER_ARCH --build-arg VERSION=$NODE_EXPORTER_VERSION .
 
 after_success:
 # push image
