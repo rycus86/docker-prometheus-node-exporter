@@ -17,5 +17,3 @@ RUN apk --no-cache add --virtual build-dependencies wget ca-certificates \
 
 EXPOSE     9100
 ENTRYPOINT [ "/bin/node_exporter" ]
-
-# Trigger Travis build
