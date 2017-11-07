@@ -1,0 +1,19 @@
+image: rycus86/prometheus-node-exporter:latest
+manifests:
+  -
+    image: rycus86/prometheus-node-exporter:amd64
+    platform:
+      architecture: amd64
+      os: linux
+  -
+    image: rycus86/prometheus-node-exporter:armhf
+    platform:
+      architecture: arm
+      variant: v7
+      os: linux
+  -
+    image: rycus86/prometheus-node-exporter:aarch64
+    platform:
+      architecture: arm64
+      variant: v8
+      os: linux
