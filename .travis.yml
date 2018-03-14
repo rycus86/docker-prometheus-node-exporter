@@ -62,4 +62,4 @@ jobs:
 
 env:
   global:
-  - NODE_EXPORTER_VERSION=0.15.1
+  - NODE_EXPORTER_VERSION=0.15.2
