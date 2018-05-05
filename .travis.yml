@@ -23,7 +23,7 @@ jobs:
         - docker build -t node_exporter:$DOCKER_TAG --build-arg ARCH=$DOCKER_ARCH --build-arg VERSION=$NODE_EXPORTER_VERSION .
       after_success:
         - |
-          docker login -u="rycus86" -p="$DOCKER_PASSWORD"
+          echo "$DOCKER_PASSWORD" | docker login --username "rycus86" --password-stdin
           if [ "$TRAVIS_BRANCH" == "master" ]; then
               docker tag node_exporter:$DOCKER_TAG rycus86/prometheus-node-exporter:$DOCKER_TAG
               docker push rycus86/prometheus-node-exporter:$DOCKER_TAG
@@ -55,7 +55,7 @@ jobs:
               sed -i "s#rycus86/prometheus-node-exporter:#rycus86/prometheus-node-exporter:${NODE_EXPORTER_VERSION}-#" manifest.yml
               sed -i "s#rycus86/prometheus-node-exporter:${NODE_EXPORTER_VERSION}-latest#rycus86/prometheus-node-exporter:${NODE_EXPORTER_VERSION}#" manifest.yml
           fi
-        - docker login -u="rycus86" -p="${DOCKER_PASSWORD}"
+        - echo "$DOCKER_PASSWORD" | docker login --username "rycus86" --password-stdin
         - curl -fsSL https://github.com/estesp/manifest-tool/releases/download/v0.7.0/manifest-tool-linux-amd64 > ./manifest-tool
         - chmod +x ./manifest-tool
         - ./manifest-tool push from-spec manifest.yml
