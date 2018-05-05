@@ -39,7 +39,7 @@ jobs:
     - <<: *deploy-stage
       env:
         - DOCKER_TAG=armhf
-        - DOCKER_ARCH=armv7
+        - DOCKER_ARCH=armv6
         - DOCKER_FROM=rycus86/armhf-alpine-qemu
 
     - <<: *deploy-stage
