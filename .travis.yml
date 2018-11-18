@@ -15,10 +15,6 @@ jobs:
     - &deploy-stage
       stage: build and deploy
       script:
-        # set up the base image
-        - sed -i "s#^FROM .*#FROM ${DOCKER_FROM}#" Dockerfile
-        # setup QEMU
-        - docker run --rm --privileged multiarch/qemu-user-static:register --reset
         # build
         - docker build -t node_exporter:$DOCKER_TAG --build-arg ARCH=$DOCKER_ARCH --build-arg VERSION=$NODE_EXPORTER_VERSION .
       after_success:
@@ -34,19 +30,21 @@ jobs:
       env:
         - DOCKER_TAG=amd64
         - DOCKER_ARCH=amd64
-        - DOCKER_FROM=alpine:latest
 
     - <<: *deploy-stage
       env:
-        - DOCKER_TAG=armhf
+        - DOCKER_TAG=armv6
         - DOCKER_ARCH=armv6
-        - DOCKER_FROM=rycus86/armhf-alpine-qemu
+
+    - <<: *deploy-stage
+      env:
+        - DOCKER_TAG=armv7
+        - DOCKER_ARCH=armv7
 
     - <<: *deploy-stage
       env:
         - DOCKER_TAG=aarch64
         - DOCKER_ARCH=arm64
-        - DOCKER_FROM=rycus86/arm64v8-alpine-qemu
 
     - stage: manifest
       script:
@@ -62,4 +60,4 @@ jobs:
 
 env:
   global:
-  - NODE_EXPORTER_VERSION=0.16.0
+  - NODE_EXPORTER_VERSION=0.17.0-rc.0

@@ -6,10 +6,16 @@ manifests:
       architecture: amd64
       os: linux
   -
-    image: rycus86/prometheus-node-exporter:armhf
+    image: rycus86/prometheus-node-exporter:armv6
     platform:
       architecture: arm
       variant: v6
+      os: linux
+  -
+    image: rycus86/prometheus-node-exporter:armv7
+    platform:
+      architecture: arm
+      variant: v7
       os: linux
   -
     image: rycus86/prometheus-node-exporter:aarch64
