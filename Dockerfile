@@ -3,7 +3,7 @@ FROM alpine AS builder
 LABEL maintainer "Viktor Adam <rycus86@gmail.com>"
 
 ARG ARCH=amd64
-ARG VERSION=0.17.0-rc.0
+ARG VERSION=0.17.0
 
 RUN apk --no-cache add wget ca-certificates \
     && mkdir -p /tmp/install \
